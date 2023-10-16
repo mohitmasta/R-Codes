@@ -26,3 +26,27 @@ data %>%
     ) +
     ggtitle("A boxplot with jitter") +
     xlab("")
+
+Grouped Boxplot:
+ggplot(data, aes(x=variety, y=note, fill=treatment)) + 
+    geom_boxplot()
+
+Arrangin the axis labels according to needs:
+Below mpg is a dataset. In your case please load your data and then proceed accordingly. Same for x and y values for ggplot.
+mpg %>%
+  mutate(class = fct_reorder(class, hwy, .fun='median')) %>%
+  ggplot( aes(x=reorder(class, hwy), y=hwy, fill=class)) + 
+    geom_boxplot() +
+    xlab("class") +
+    theme(legend.position="none") +
+    xlab("")
+ 
+# Using number of observation per group
+mpg %>%
+  mutate(class = fct_reorder(class, hwy, .fun='length' )) %>%
+  ggplot( aes(x=class, y=hwy, fill=class)) + 
+    geom_boxplot() +
+    xlab("class") +
+    theme(legend.position="none") +
+    xlab("") +
+    xlab("")
