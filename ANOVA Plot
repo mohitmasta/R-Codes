@@ -1,0 +1,20 @@
+model <- aov(N2O ~ Site, data = Rdata)
+summary(model)
+
+
+library(ggstatsplot)
+library(rstantools)
+
+ggbetweenstats(
+  data = Rdata,
+  x = Site,
+  y = N2O,
+  type = "parametric", # ANOVA or Kruskal-Wallis
+  var.equal = FALSE, # ANOVA or Welch ANOVA
+  plot.type = "box",
+  pairwise.comparisons = TRUE,
+  pairwise.display = "significant",
+  centrality.plotting = TRUE,
+  bf.message = FALSE
+)+
+  ggplot2::scale_colour_manual(values=c("#006400", "#00FF00", "#3399FF"))
